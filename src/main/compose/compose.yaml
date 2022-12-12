@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  database:
+    image: "postgres"
+    container_name: "app-database"
+    environment:
+       POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./import.sql:/docker-entrypoint-initdb.d/init.sql
+  application:
+    image: "quarkus-hm"
+    container_name: "quarkus-hello"
+    ports:
+      - "8080:8080"
